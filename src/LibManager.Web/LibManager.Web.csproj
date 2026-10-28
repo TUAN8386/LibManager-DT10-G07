@@ -1,0 +1,52 @@
+<!--
+    Người thực hiện: Đinh Anh Tuấn – MSSV 2410900083
+    Công việc: W1-09 – khởi tạo solution, cấu hình dự án và .gitignore (tuần 1, nhánh feature/tuan-khoi-tao)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+-->
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>LibManager.Web</RootNamespace>
+    <UserSecretsId>libmanager-k24-g07-dt10</UserSecretsId>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.*" />
+    <PackageReference Include="ClosedXML" Version="0.104.*" />
+    <PackageReference Include="MailKit" Version="4.*" />
+    <!-- Ghim bản vá: 10.0.0 (kéo gián tiếp) có lỗ hổng GHSA-2fmv-rv2c-59x7, GHSA-846f-f764-76mx -->
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.*" />
+  </ItemGroup>
+
+  <!-- Mã nguồn React (Vite) nằm trong ClientApp, bản build đã có sẵn ở wwwroot/app -->
+  <ItemGroup>
+    <Compile Remove="ClientApp\**" />
+    <Content Remove="ClientApp\**" />
+    <None Remove="ClientApp\**" />
+    <None Include="ClientApp\**" Exclude="ClientApp\node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Data\SeedData\**" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="LibManager.Tests" />
+  </ItemGroup>
+
+</Project>

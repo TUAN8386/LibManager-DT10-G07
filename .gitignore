@@ -1,0 +1,19 @@
+# ============================================================
+# Người thực hiện: Đinh Anh Tuấn – MSSV 2410900083
+# Công việc: W1-09 – khởi tạo solution, cấu hình dự án và .gitignore (tuần 1, nhánh feature/tuan-khoi-tao)
+# Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+# ============================================================
+## .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.swp
+TestResults/
+## Node / React
+src/LibManager.Web/ClientApp/node_modules/
+## Bí mật – dùng dotnet user-secrets
+appsettings.*.local.json
+## Thư viện tải bằng libman (có thể khôi phục: libman restore)
+src/LibManager.Web/wwwroot/lib/
