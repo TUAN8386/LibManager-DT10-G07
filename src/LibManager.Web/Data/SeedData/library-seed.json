@@ -1,0 +1,779 @@
+{
+ "categories": [
+  {
+   "slug": "cntt",
+   "name": "Công nghệ thông tin",
+   "shelfPrefix": "A"
+  },
+  {
+   "slug": "kinh-te",
+   "name": "Kinh tế – Quản trị",
+   "shelfPrefix": "B"
+  },
+  {
+   "slug": "van-hoc-vn",
+   "name": "Văn học Việt Nam",
+   "shelfPrefix": "C"
+  },
+  {
+   "slug": "van-hoc-nn",
+   "name": "Văn học nước ngoài",
+   "shelfPrefix": "D"
+  },
+  {
+   "slug": "ky-nang",
+   "name": "Kỹ năng sống",
+   "shelfPrefix": "E"
+  },
+  {
+   "slug": "khoa-hoc",
+   "name": "Khoa học tự nhiên",
+   "shelfPrefix": "F"
+  },
+  {
+   "slug": "ngoai-ngu",
+   "name": "Ngoại ngữ – Từ điển",
+   "shelfPrefix": "G"
+  }
+ ],
+ "readerTypes": [
+  {
+   "code": "sinh-vien",
+   "name": "Sinh viên",
+   "maxBooks": 5,
+   "loanDays": 14,
+   "maxRenewals": 2,
+   "finePerDay": 2000
+  },
+  {
+   "code": "giang-vien",
+   "name": "Giảng viên",
+   "maxBooks": 10,
+   "loanDays": 30,
+   "maxRenewals": 2,
+   "finePerDay": 1000
+  },
+  {
+   "code": "ban-doc-ngoai",
+   "name": "Bạn đọc ngoài trường",
+   "maxBooks": 3,
+   "loanDays": 7,
+   "maxRenewals": 1,
+   "finePerDay": 5000
+  }
+ ],
+ "books": [
+  {
+   "title": "Clean Code: Mã sạch và con đường trở thành lập trình viên giỏi",
+   "authors": [
+    "Robert C. Martin"
+   ],
+   "category": "cntt",
+   "publisher": "NXB Thanh Niên",
+   "year": 2021,
+   "price": 289000,
+   "copies": 1,
+   "referenceOnly": false,
+   "isbn": "9786041000001",
+   "shelf": "A1-01"
+  },
+  {
+   "title": "The Pragmatic Programmer",
+   "authors": [
+    "David Thomas",
+    "Andrew Hunt"
+   ],
+   "category": "cntt",
+   "publisher": "Addison-Wesley",
+   "year": 2019,
+   "price": 750000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041037076",
+   "shelf": "A1-02"
+  },
+  {
+   "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+   "authors": [
+    "Erich Gamma",
+    "Richard Helm",
+    "Ralph Johnson",
+    "John Vlissides"
+   ],
+   "category": "cntt",
+   "publisher": "Addison-Wesley",
+   "year": 1994,
+   "price": 820000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041074149",
+   "shelf": "A1-03"
+  },
+  {
+   "title": "Introduction to Algorithms",
+   "authors": [
+    "Thomas H. Cormen",
+    "Charles E. Leiserson",
+    "Ronald L. Rivest",
+    "Clifford Stein"
+   ],
+   "category": "cntt",
+   "publisher": "MIT Press",
+   "year": 2022,
+   "price": 1450000,
+   "copies": 3,
+   "referenceOnly": false,
+   "isbn": "9786041111219",
+   "shelf": "A1-04"
+  },
+  {
+   "title": "Refactoring: Improving the Design of Existing Code",
+   "authors": [
+    "Martin Fowler"
+   ],
+   "category": "cntt",
+   "publisher": "Addison-Wesley",
+   "year": 2018,
+   "price": 690000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041148284",
+   "shelf": "A1-05"
+  },
+  {
+   "title": "Head First Design Patterns",
+   "authors": [
+    "Eric Freeman",
+    "Elisabeth Robson"
+   ],
+   "category": "cntt",
+   "publisher": "O'Reilly Media",
+   "year": 2020,
+   "price": 620000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041185357",
+   "shelf": "A1-06"
+  },
+  {
+   "title": "Cấu trúc dữ liệu và giải thuật",
+   "authors": [
+    "Đỗ Xuân Lôi"
+   ],
+   "category": "cntt",
+   "publisher": "NXB Khoa học và Kỹ thuật",
+   "year": 2018,
+   "price": 95000,
+   "copies": 4,
+   "referenceOnly": false,
+   "isbn": "9786041222427",
+   "shelf": "A2-01"
+  },
+  {
+   "title": "Computer Networks",
+   "authors": [
+    "Andrew S. Tanenbaum",
+    "David J. Wetherall"
+   ],
+   "category": "cntt",
+   "publisher": "Pearson",
+   "year": 2021,
+   "price": 980000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041259492",
+   "shelf": "A2-02"
+  },
+  {
+   "title": "Modern Operating Systems",
+   "authors": [
+    "Andrew S. Tanenbaum",
+    "Herbert Bos"
+   ],
+   "category": "cntt",
+   "publisher": "Pearson",
+   "year": 2022,
+   "price": 1050000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041296565",
+   "shelf": "A2-03"
+  },
+  {
+   "title": "ASP.NET Core in Action",
+   "authors": [
+    "Andrew Lock"
+   ],
+   "category": "cntt",
+   "publisher": "Manning",
+   "year": 2023,
+   "price": 890000,
+   "copies": 3,
+   "referenceOnly": false,
+   "isbn": "9786041333635",
+   "shelf": "A2-04"
+  },
+  {
+   "title": "Pro ASP.NET Core 7",
+   "authors": [
+    "Adam Freeman"
+   ],
+   "category": "cntt",
+   "publisher": "Apress",
+   "year": 2023,
+   "price": 920000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041370708",
+   "shelf": "A2-05"
+  },
+  {
+   "title": "Learning React: Modern Patterns for Developing React Apps",
+   "authors": [
+    "Alex Banks",
+    "Eve Porcello"
+   ],
+   "category": "cntt",
+   "publisher": "O'Reilly Media",
+   "year": 2020,
+   "price": 640000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041407770",
+   "shelf": "A2-06"
+  },
+  {
+   "title": "Database System Concepts",
+   "authors": [
+    "Abraham Silberschatz",
+    "Henry F. Korth",
+    "S. Sudarshan"
+   ],
+   "category": "cntt",
+   "publisher": "McGraw-Hill",
+   "year": 2019,
+   "price": 1100000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041444843",
+   "shelf": "A3-01"
+  },
+  {
+   "title": "Code Complete",
+   "authors": [
+    "Steve McConnell"
+   ],
+   "category": "cntt",
+   "publisher": "Microsoft Press",
+   "year": 2004,
+   "price": 780000,
+   "copies": 1,
+   "referenceOnly": false,
+   "isbn": "9786041481916",
+   "shelf": "A3-02"
+  },
+  {
+   "title": "Nguyên lý kinh tế học",
+   "authors": [
+    "N. Gregory Mankiw"
+   ],
+   "category": "kinh-te",
+   "publisher": "Cengage Learning",
+   "year": 2020,
+   "price": 450000,
+   "copies": 3,
+   "referenceOnly": false,
+   "isbn": "9786041518988",
+   "shelf": "B1-01"
+  },
+  {
+   "title": "Tư duy nhanh và chậm",
+   "authors": [
+    "Daniel Kahneman"
+   ],
+   "category": "kinh-te",
+   "publisher": "NXB Thế Giới",
+   "year": 2019,
+   "price": 239000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041555051",
+   "shelf": "B1-02"
+  },
+  {
+   "title": "Cha giàu cha nghèo",
+   "authors": [
+    "Robert T. Kiyosaki"
+   ],
+   "category": "kinh-te",
+   "publisher": "NXB Trẻ",
+   "year": 2020,
+   "price": 119000,
+   "copies": 3,
+   "referenceOnly": false,
+   "isbn": "9786041592124",
+   "shelf": "B1-03"
+  },
+  {
+   "title": "Từ tốt đến vĩ đại",
+   "authors": [
+    "Jim Collins"
+   ],
+   "category": "kinh-te",
+   "publisher": "NXB Trẻ",
+   "year": 2019,
+   "price": 185000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041629196",
+   "shelf": "B1-04"
+  },
+  {
+   "title": "Số đỏ",
+   "authors": [
+    "Vũ Trọng Phụng"
+   ],
+   "category": "van-hoc-vn",
+   "publisher": "NXB Văn học",
+   "year": 2020,
+   "price": 68000,
+   "copies": 3,
+   "referenceOnly": false,
+   "isbn": "9786041666269",
+   "shelf": "C1-01"
+  },
+  {
+   "title": "Tắt đèn",
+   "authors": [
+    "Ngô Tất Tố"
+   ],
+   "category": "van-hoc-vn",
+   "publisher": "NXB Văn học",
+   "year": 2019,
+   "price": 55000,
+   "copies": 3,
+   "referenceOnly": false,
+   "isbn": "9786041703339",
+   "shelf": "C1-02"
+  },
+  {
+   "title": "Truyện Kiều",
+   "authors": [
+    "Nguyễn Du"
+   ],
+   "category": "van-hoc-vn",
+   "publisher": "NXB Giáo dục Việt Nam",
+   "year": 2018,
+   "price": 75000,
+   "copies": 4,
+   "referenceOnly": false,
+   "isbn": "9786041740402",
+   "shelf": "C1-03"
+  },
+  {
+   "title": "Dế Mèn phiêu lưu ký",
+   "authors": [
+    "Tô Hoài"
+   ],
+   "category": "van-hoc-vn",
+   "publisher": "NXB Kim Đồng",
+   "year": 2021,
+   "price": 50000,
+   "copies": 4,
+   "referenceOnly": false,
+   "isbn": "9786041777477",
+   "shelf": "C1-04"
+  },
+  {
+   "title": "Chí Phèo – Tuyển tập truyện ngắn Nam Cao",
+   "authors": [
+    "Nam Cao"
+   ],
+   "category": "van-hoc-vn",
+   "publisher": "NXB Văn học",
+   "year": 2020,
+   "price": 90000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041814547",
+   "shelf": "C1-05"
+  },
+  {
+   "title": "Vợ nhặt",
+   "authors": [
+    "Kim Lân"
+   ],
+   "category": "van-hoc-vn",
+   "publisher": "NXB Hội Nhà văn",
+   "year": 2019,
+   "price": 45000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041851610",
+   "shelf": "C1-06"
+  },
+  {
+   "title": "Nhà giả kim",
+   "authors": [
+    "Paulo Coelho"
+   ],
+   "category": "van-hoc-nn",
+   "publisher": "NXB Hội Nhà văn",
+   "year": 2020,
+   "price": 79000,
+   "copies": 4,
+   "referenceOnly": false,
+   "isbn": "9786041888685",
+   "shelf": "D1-01"
+  },
+  {
+   "title": "Ông già và biển cả",
+   "authors": [
+    "Ernest Hemingway"
+   ],
+   "category": "van-hoc-nn",
+   "publisher": "NXB Văn học",
+   "year": 2018,
+   "price": 52000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041925755",
+   "shelf": "D1-02"
+  },
+  {
+   "title": "Những người khốn khổ",
+   "authors": [
+    "Victor Hugo"
+   ],
+   "category": "van-hoc-nn",
+   "publisher": "NXB Văn học",
+   "year": 2017,
+   "price": 320000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786041962828",
+   "shelf": "D1-03"
+  },
+  {
+   "title": "Hoàng tử bé",
+   "authors": [
+    "Antoine de Saint-Exupéry"
+   ],
+   "category": "van-hoc-nn",
+   "publisher": "NXB Kim Đồng",
+   "year": 2019,
+   "price": 60000,
+   "copies": 3,
+   "referenceOnly": false,
+   "isbn": "9786041999893",
+   "shelf": "D1-04"
+  },
+  {
+   "title": "1984",
+   "authors": [
+    "George Orwell"
+   ],
+   "category": "van-hoc-nn",
+   "publisher": "NXB Hội Nhà văn",
+   "year": 2021,
+   "price": 98000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786042036962",
+   "shelf": "D1-05"
+  },
+  {
+   "title": "Bố già",
+   "authors": [
+    "Mario Puzo"
+   ],
+   "category": "van-hoc-nn",
+   "publisher": "NXB Văn học",
+   "year": 2020,
+   "price": 150000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786042073035",
+   "shelf": "D1-06"
+  },
+  {
+   "title": "Đắc nhân tâm",
+   "authors": [
+    "Dale Carnegie"
+   ],
+   "category": "ky-nang",
+   "publisher": "NXB Tổng hợp TP.HCM",
+   "year": 2021,
+   "price": 86000,
+   "copies": 4,
+   "referenceOnly": false,
+   "isbn": "9786042110105",
+   "shelf": "E1-01"
+  },
+  {
+   "title": "7 thói quen hiệu quả",
+   "authors": [
+    "Stephen R. Covey"
+   ],
+   "category": "ky-nang",
+   "publisher": "NXB Tổng hợp TP.HCM",
+   "year": 2020,
+   "price": 159000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786042147170",
+   "shelf": "E1-02"
+  },
+  {
+   "title": "Thay đổi tí hon, hiệu quả bất ngờ",
+   "authors": [
+    "James Clear"
+   ],
+   "category": "ky-nang",
+   "publisher": "NXB Thế Giới",
+   "year": 2021,
+   "price": 189000,
+   "copies": 3,
+   "referenceOnly": false,
+   "isbn": "9786042184243",
+   "shelf": "E1-03"
+  },
+  {
+   "title": "Nhà lãnh đạo không chức danh",
+   "authors": [
+    "Robin Sharma"
+   ],
+   "category": "ky-nang",
+   "publisher": "NXB Trẻ",
+   "year": 2019,
+   "price": 99000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786042221313",
+   "shelf": "E1-04"
+  },
+  {
+   "title": "Lược sử thời gian",
+   "authors": [
+    "Stephen Hawking"
+   ],
+   "category": "khoa-hoc",
+   "publisher": "NXB Trẻ",
+   "year": 2019,
+   "price": 115000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786042258388",
+   "shelf": "F1-01"
+  },
+  {
+   "title": "Vũ trụ",
+   "authors": [
+    "Carl Sagan"
+   ],
+   "category": "khoa-hoc",
+   "publisher": "NXB Thế Giới",
+   "year": 2020,
+   "price": 210000,
+   "copies": 1,
+   "referenceOnly": false,
+   "isbn": "9786042295451",
+   "shelf": "F1-02"
+  },
+  {
+   "title": "Sapiens: Lược sử loài người",
+   "authors": [
+    "Yuval Noah Harari"
+   ],
+   "category": "khoa-hoc",
+   "publisher": "NXB Thế Giới",
+   "year": 2021,
+   "price": 259000,
+   "copies": 3,
+   "referenceOnly": false,
+   "isbn": "9786042332521",
+   "shelf": "F1-03"
+  },
+  {
+   "title": "Gen: Lịch sử và tương lai của nhân loại",
+   "authors": [
+    "Siddhartha Mukherjee"
+   ],
+   "category": "khoa-hoc",
+   "publisher": "NXB Thế Giới",
+   "year": 2020,
+   "price": 320000,
+   "copies": 1,
+   "referenceOnly": false,
+   "isbn": "9786042369596",
+   "shelf": "F1-04"
+  },
+  {
+   "title": "English Grammar in Use",
+   "authors": [
+    "Raymond Murphy"
+   ],
+   "category": "ngoai-ngu",
+   "publisher": "Cambridge University Press",
+   "year": 2019,
+   "price": 295000,
+   "copies": 4,
+   "referenceOnly": false,
+   "isbn": "9786042406666",
+   "shelf": "G1-01"
+  },
+  {
+   "title": "Oxford Advanced Learner's Dictionary",
+   "authors": [
+    "A. S. Hornby"
+   ],
+   "category": "ngoai-ngu",
+   "publisher": "Oxford University Press",
+   "year": 2020,
+   "price": 650000,
+   "copies": 2,
+   "referenceOnly": true,
+   "isbn": "9786042443739",
+   "shelf": "G1-02"
+  },
+  {
+   "title": "Từ điển Anh – Việt",
+   "authors": [
+    "Viện Ngôn ngữ học"
+   ],
+   "category": "ngoai-ngu",
+   "publisher": "NXB Từ điển Bách khoa",
+   "year": 2018,
+   "price": 280000,
+   "copies": 2,
+   "referenceOnly": true,
+   "isbn": "9786042480802",
+   "shelf": "G1-03"
+  },
+  {
+   "title": "IELTS Vocabulary in Use",
+   "authors": [
+    "Michael McCarthy",
+    "Felicity O'Dell"
+   ],
+   "category": "ngoai-ngu",
+   "publisher": "Cambridge University Press",
+   "year": 2020,
+   "price": 240000,
+   "copies": 2,
+   "referenceOnly": false,
+   "isbn": "9786042517874",
+   "shelf": "G1-04"
+  }
+ ],
+ "readers": [
+  {
+   "card": "DG24000001",
+   "name": "Nguyễn Văn An",
+   "type": "sinh-vien",
+   "email": "an.nv@student.libmanager.local",
+   "phone": "0901000001",
+   "validDays": 365,
+   "locked": false
+  },
+  {
+   "card": "DG24000002",
+   "name": "Trần Thị Bình",
+   "type": "sinh-vien",
+   "email": "binh.tt@student.libmanager.local",
+   "phone": "0901000002",
+   "validDays": 365,
+   "locked": false
+  },
+  {
+   "card": "DG24000003",
+   "name": "Lê Minh Châu",
+   "type": "giang-vien",
+   "email": "chau.lm@libmanager.local",
+   "phone": "0901000003",
+   "validDays": 730,
+   "locked": false
+  },
+  {
+   "card": "DG24000004",
+   "name": "Phạm Quốc Dũng",
+   "type": "sinh-vien",
+   "email": "dung.pq@student.libmanager.local",
+   "phone": "0901000004",
+   "validDays": -10,
+   "locked": false
+  },
+  {
+   "card": "DG24000005",
+   "name": "Hoàng Thu Hà",
+   "type": "sinh-vien",
+   "email": "ha.ht@student.libmanager.local",
+   "phone": "0901000005",
+   "validDays": 365,
+   "locked": true
+  },
+  {
+   "card": "DG24000006",
+   "name": "Vũ Đức Huy",
+   "type": "sinh-vien",
+   "email": "huy.vd@student.libmanager.local",
+   "phone": "0901000006",
+   "validDays": 365,
+   "locked": false
+  },
+  {
+   "card": "DG24000007",
+   "name": "Đặng Ngọc Lan",
+   "type": "sinh-vien",
+   "email": "lan.dn@student.libmanager.local",
+   "phone": "0901000007",
+   "validDays": 365,
+   "locked": false
+  },
+  {
+   "card": "DG24000008",
+   "name": "Bùi Thanh Mai",
+   "type": "giang-vien",
+   "email": "mai.bt@libmanager.local",
+   "phone": "0901000008",
+   "validDays": 730,
+   "locked": false
+  },
+  {
+   "card": "DG24000009",
+   "name": "Ngô Gia Phúc",
+   "type": "ban-doc-ngoai",
+   "email": "phuc.ng@example.com",
+   "phone": "0901000009",
+   "validDays": 180,
+   "locked": false
+  },
+  {
+   "card": "DG24000010",
+   "name": "Đỗ Khánh Linh",
+   "type": "sinh-vien",
+   "email": "linh.dk@student.libmanager.local",
+   "phone": "0901000010",
+   "validDays": 365,
+   "locked": false
+  },
+  {
+   "card": "DG24000011",
+   "name": "Trịnh Hải Nam",
+   "type": "sinh-vien",
+   "email": "nam.th@student.libmanager.local",
+   "phone": "0901000011",
+   "validDays": 365,
+   "locked": false
+  },
+  {
+   "card": "DG24000012",
+   "name": "Lý Bảo Ngọc",
+   "type": "sinh-vien",
+   "email": "ngoc.lb@student.libmanager.local",
+   "phone": "0901000012",
+   "validDays": 365,
+   "locked": false
+  }
+ ]
+}
