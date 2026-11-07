@@ -1,0 +1,44 @@
+@*
+    Người thực hiện: Đinh Anh Tuấn – MSSV 2410900083
+    Công việc: W3-03 – quản lý đầu sách, thể loại, xóa mềm (tuần 3, nhánh feature/tuan-dau-sach)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@model List<Category>
+@{ ViewData["Title"] = "Thể loại"; var counts = (Dictionary<int, int>)ViewBag.Counts; }
+<div class="page-title"><h1>Thể loại</h1></div>
+<div class="row g-3">
+    <div class="col-lg-8">
+        <div class="card"><table class="table align-middle mb-0">
+            <thead><tr><th>Tên</th><th>Slug</th><th class="text-center">Số đầu sách</th><th>Trạng thái</th><th></th></tr></thead>
+            <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>
+                        <form asp-action="Save" method="post" class="d-flex gap-2">
+                            <input type="hidden" name="id" value="@c.Id" />
+                            <input name="name" value="@c.Name" class="form-control form-control-sm" />
+                            <input type="hidden" name="isActive" value="@c.IsActive.ToString().ToLower()" />
+                            <button class="btn btn-sm btn-outline-primary" title="Lưu"><i class="bi bi-check2"></i></button>
+                        </form>
+                    </td>
+                    <td class="mono small">@c.Slug</td>
+                    <td class="text-center">@counts.GetValueOrDefault(c.Id)</td>
+                    <td>@(c.IsActive ? "Đang dùng" : "Ngừng dùng")</td>
+                    <td class="text-end">
+                        <form asp-action="Delete" asp-route-id="@c.Id" method="post" data-confirm="Xóa thể loại @c.Name?"><button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table></div>
+    </div>
+    <div class="col-lg-4">
+        <form asp-action="Save" method="post" class="card card-body">
+            <h2 class="h6">Thêm thể loại</h2>
+            <input type="hidden" name="id" value="0" />
+            <input name="name" class="form-control mb-2" placeholder="Tên thể loại" required maxlength="100" />
+            <button class="btn btn-primary">Thêm</button>
+        </form>
+    </div>
+</div>

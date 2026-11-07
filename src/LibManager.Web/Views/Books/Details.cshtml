@@ -1,0 +1,86 @@
+@*
+    Người thực hiện: Đinh Anh Tuấn – MSSV 2410900083
+    Công việc: W3-03 – quản lý đầu sách, thể loại, xóa mềm (tuần 3, nhánh feature/tuan-dau-sach)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@model Book
+@{
+    ViewData["Title"] = Model.Title;
+    var due = (Dictionary<int, DateTime>)ViewBag.Due;
+    var copies = Model.Copies.OrderBy(c => c.Barcode).ToList();
+    var printCodes = TempData["printCodes"] as string;
+}
+<div class="page-title">
+    <div>
+        <div class="small text-muted"><a asp-action="Index">Đầu sách</a> / @Model.Category?.Name</div>
+        <h1>@Model.Title</h1>
+        <div class="sub">@string.Join(", ", Model.BookAuthors.OrderBy(a => a.Order).Select(a => a.Author!.Name))</div>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-outline-secondary" asp-controller="Catalog" asp-action="Details" asp-route-id="@Model.Id"><i class="bi bi-eye"></i> Xem như độc giả</a>
+        <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model.Id"><i class="bi bi-pencil"></i> Sửa</a>
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post" data-confirm="Xóa đầu sách này? Nếu đã có lịch sử mượn, hệ thống sẽ xóa mềm.">
+            <button class="btn btn-outline-danger"><i class="bi bi-trash"></i> Xóa</button>
+        </form>
+    </div>
+</div>
+@if (printCodes is not null)
+{
+    <div class="alert alert-info d-flex justify-content-between align-items-center">
+        <span><i class="bi bi-upc"></i> Bản sao mới cần dán nhãn mã vạch.</span>
+        <a class="btn btn-sm btn-info" target="_blank" asp-action="Labels" asp-route-codes="@printCodes"><i class="bi bi-printer"></i> In nhãn ngay</a>
+    </div>
+}
+<div class="row g-3">
+    <div class="col-lg-3">
+        <div class="card p-2 mb-3">@Ui.Cover(Model.Title, Model.CoverUrl)</div>
+        <div class="card"><div class="card-body small">
+            <div><span class="text-muted">ISBN:</span> <span class="mono">@(Model.Isbn ?? "—")</span></div>
+            @if (Model.Isbn is not null) { <div class="my-2">@Ui.Barcode(Model.Isbn, 1.2, 36)</div> }
+            <div><span class="text-muted">NXB:</span> @(Model.Publisher?.Name ?? "—")</div>
+            <div><span class="text-muted">Năm:</span> @Model.PublishYear</div>
+            <div><span class="text-muted">Giá bìa:</span> @Ui.Vnd(Model.Price)</div>
+            <div><span class="text-muted">Cho mượn:</span> @(Model.IsReferenceOnly ? "Chỉ đọc tại chỗ" : "Được mượn về")</div>
+        </div></div>
+    </div>
+    <div class="col-lg-9">
+        <div class="card mb-3">
+            <div class="card-header d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <span>Bản sao (@copies.Count)</span>
+                <form asp-action="AddCopies" method="post" class="d-flex gap-2">
+                    <input type="hidden" name="BookId" value="@Model.Id" />
+                    <input type="number" name="Count" value="1" min="1" max="200" class="form-control form-control-sm" style="width:80px" title="Số lượng" />
+                    <input name="ShelfLocation" value="@copies.LastOrDefault()?.ShelfLocation" class="form-control form-control-sm" style="width:110px" placeholder="Kệ" />
+                    <button class="btn btn-sm btn-primary text-nowrap"><i class="bi bi-plus-lg"></i> Thêm bản sao</button>
+                </form>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                    <thead><tr><th>Mã vạch</th><th>Kệ</th><th>Trạng thái</th><th>Tình trạng</th><th>Hạn trả</th><th></th></tr></thead>
+                    <tbody>
+                    @foreach (var c in copies)
+                    {
+                        <tr>
+                            <td class="mono"><a asp-controller="Lookup" asp-action="Index" asp-route-code="@c.Barcode" class="text-decoration-none">@c.Barcode</a></td>
+                            <td>@c.ShelfLocation</td>
+                            <td>@Ui.StatusBadge(c.Status)</td>
+                            <td class="small">@c.Condition</td>
+                            <td>@(due.TryGetValue(c.Id, out var d) ? d.ToString("dd/MM/yyyy") : "")</td>
+                            <td class="text-end text-nowrap">
+                                <a class="btn btn-sm btn-outline-secondary" asp-action="Labels" asp-route-codes="@c.Barcode" target="_blank" title="In nhãn"><i class="bi bi-printer"></i></a>
+                                <a class="btn btn-sm btn-outline-primary" asp-action="EditCopy" asp-route-id="@c.Id" title="Sửa"><i class="bi bi-pencil"></i></a>
+                                <form asp-action="DeleteCopy" asp-route-id="@c.Id" method="post" class="d-inline" data-confirm="Xóa/thanh lý bản sao @c.Barcode?">
+                                    <button class="btn btn-sm btn-outline-danger" title="Xóa / thanh lý"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                    @if (!copies.Any()) { <tr><td colspan="6" class="text-center text-muted py-3">Chưa có bản sao.</td></tr> }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer bg-white text-end"><a class="btn btn-sm btn-outline-secondary" target="_blank" asp-action="Labels" asp-route-bookId="@Model.Id"><i class="bi bi-printer"></i> In tất cả nhãn</a></div>
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Model.Description)) { <div class="card card-body small">@Model.Description</div> }
+    </div>
+</div>

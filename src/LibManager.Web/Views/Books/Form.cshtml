@@ -1,0 +1,78 @@
+@*
+    Người thực hiện: Đinh Anh Tuấn – MSSV 2410900083
+    Công việc: W3-03 – quản lý đầu sách, thể loại, xóa mềm (tuần 3, nhánh feature/tuan-dau-sach)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@model BookFormVm
+@{
+    bool isNew = Model.Id == 0;
+    ViewData["Title"] = isNew ? "Thêm đầu sách" : "Sửa đầu sách";
+}
+<div class="page-title"><div><h1>@ViewData["Title"]</h1><div class="sub">Có thể quét mã ISBN trên bìa để tự điền thông tin (Open Library).</div></div></div>
+<form asp-action="@(isNew ? "Create" : "Edit")" method="post" class="card" novalidate>
+    <div class="card-body">
+        <input type="hidden" asp-for="Id" />
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2"></div>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label asp-for="Isbn" class="form-label"></label>
+                <div class="input-group">
+                    <input asp-for="Isbn" class="form-control mono" placeholder="Quét hoặc nhập ISBN-13" autocomplete="off" />
+                    <button type="button" id="btnIsbn" class="btn btn-outline-secondary" title="Tra Open Library"><i class="bi bi-cloud-download"></i></button>
+                </div>
+                <span asp-validation-for="Isbn" class="text-danger small"></span>
+                <div id="isbnMsg" class="form-text"></div>
+            </div>
+            <div class="col-md-8"><label asp-for="Title" class="form-label"></label><input asp-for="Title" class="form-control" /><span asp-validation-for="Title" class="text-danger small"></span></div>
+            <div class="col-md-6"><label asp-for="Authors" class="form-label"></label><input asp-for="Authors" class="form-control" /><span asp-validation-for="Authors" class="text-danger small"></span></div>
+            <div class="col-md-6">
+                <label asp-for="Publisher" class="form-label"></label>
+                <input asp-for="Publisher" class="form-control" list="pubList" />
+                <datalist id="pubList">@foreach (var p in Model.PublisherNames) { <option value="@p"></option> }</datalist>
+            </div>
+            <div class="col-md-4"><label asp-for="CategoryId" class="form-label"></label><select asp-for="CategoryId" asp-items="Model.Categories" class="form-select"><option value="">-- Chọn --</option></select><span asp-validation-for="CategoryId" class="text-danger small"></span></div>
+            <div class="col-md-4"><label asp-for="PublishYear" class="form-label"></label><input asp-for="PublishYear" class="form-control" /><span asp-validation-for="PublishYear" class="text-danger small"></span></div>
+            <div class="col-md-4"><label asp-for="Price" class="form-label"></label><input asp-for="Price" class="form-control" /><span asp-validation-for="Price" class="text-danger small"></span></div>
+            <div class="col-md-8"><label asp-for="CoverUrl" class="form-label"></label><input asp-for="CoverUrl" class="form-control" /><span asp-validation-for="CoverUrl" class="text-danger small"></span></div>
+            <div class="col-md-4 d-flex align-items-end"><div class="form-check mb-2"><input asp-for="IsReferenceOnly" class="form-check-input" /><label asp-for="IsReferenceOnly" class="form-check-label"></label></div></div>
+            <div class="col-12"><label asp-for="Description" class="form-label"></label><textarea asp-for="Description" rows="3" class="form-control" data-scanner-ignore></textarea></div>
+            @if (isNew)
+            {
+                <div class="col-md-3"><label asp-for="InitialCopies" class="form-label"></label><input asp-for="InitialCopies" class="form-control" /></div>
+                <div class="col-md-3"><label asp-for="ShelfLocation" class="form-label"></label><input asp-for="ShelfLocation" class="form-control" placeholder="vd. A1-01" /></div>
+                <div class="col-md-6 small text-muted d-flex align-items-end">Mã vạch bản sao (BS…) được sinh tự động, có chữ số kiểm tra Luhn.</div>
+            }
+        </div>
+    </div>
+    <div class="card-footer bg-white d-flex gap-2">
+        <button class="btn btn-primary"><i class="bi bi-save"></i> Lưu</button>
+        <a class="btn btn-outline-secondary" asp-action="@(isNew ? "Index" : "Details")" asp-route-id="@(isNew ? (int?)null : Model.Id)">Hủy</a>
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/barcode-scanner.js" asp-append-version="true"></script>
+    <script>
+        (function () {
+            const isbn = document.getElementById('Isbn');
+            const msg = document.getElementById('isbnMsg');
+            async function fetchIsbn(code) {
+                const c = BarcodeScanner.classify(code);
+                if (c.type !== 'isbn' || !c.valid) { msg.innerHTML = '<span class="text-danger">ISBN-13 không hợp lệ.</span>'; return; }
+                isbn.value = c.code;
+                msg.textContent = 'Đang tra cứu…';
+                const r = await api('/api/books/isbn-info/' + c.code);
+                if (!r.ok) { msg.innerHTML = '<span class="text-warning">' + esc(r.message) + ' Hãy nhập tay.</span>'; return; }
+                if (r.data.exists) { msg.innerHTML = 'Đã có đầu sách: <a href="/Books/Details/' + r.data.id + '">' + esc(r.data.title) + '</a>'; return; }
+                const i = r.data.info;
+                const set = (id, v) => { const el = document.getElementById(id); if (el && v && !el.value) el.value = v; };
+                set('Title', i.title); set('Authors', (i.authors || []).join(', ')); set('Publisher', i.publisher);
+                set('PublishYear', i.publishYear); set('CoverUrl', i.coverUrl);
+                msg.innerHTML = '<span class="text-success">Đã điền thông tin từ Open Library – vui lòng kiểm tra lại.</span>';
+            }
+            document.getElementById('btnIsbn').addEventListener('click', () => fetchIsbn(isbn.value));
+            // Quét ISBN ở bất kỳ đâu trên trang → điền vào ô ISBN và tra cứu
+            new BarcodeScanner({ input: isbn, refocus: false, onScan: (code) => fetchIsbn(code) }).start();
+        })();
+    </script>
+}
