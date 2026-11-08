@@ -1,0 +1,49 @@
+@*
+    Người thực hiện: Bùi Văn Long – MSSV 2410900047
+    Công việc: W3-04 – mã bản sao Luhn, Code 128, in nhãn (tuần 3, nhánh feature/long-ban-sao)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@model List<LabelVm>
+@{
+    Layout = null;
+    bool isCard = ViewBag.IsCard is true;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title – LibManager</title>
+    <style>
+        @@page { size: A4; margin: 8mm; }
+        body { font-family: "Segoe UI", Arial, sans-serif; margin: 0; color: #111; }
+        .toolbar { padding: 10px 14px; background: #f1f5f9; border-bottom: 1px solid #cbd5e1; display: flex; gap: 12px; align-items: center; font-size: 14px; }
+        .toolbar button { padding: 6px 14px; font-size: 14px; cursor: pointer; }
+        .sheet { display: grid; grid-template-columns: repeat(@(isCard ? 2 : 3), 1fr); gap: 4mm; padding: 6mm; }
+        .label { border: 1px dashed #94a3b8; border-radius: 3mm; padding: 2.5mm 3mm; text-align: center; break-inside: avoid; height: @(isCard ? "50mm" : "34mm"); box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; }
+        .label .lib { font-size: 8pt; letter-spacing: .08em; text-transform: uppercase; color: #475569; }
+        .label .l1 { font-size: @(isCard ? "12pt" : "8.5pt"); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1mm; }
+        .label .l2 { font-size: 8pt; color: #334155; }
+        .label svg { max-width: 100%; height: auto; margin: 1mm auto 0; display: block; }
+        @@media print { .toolbar { display: none; } .label { border-color: #cbd5e1; } }
+    </style>
+</head>
+<body>
+<div class="toolbar">
+    <strong>@ViewBag.Title</strong> · @Model.Count nhãn
+    <button onclick="window.print()">🖨 In (Ctrl+P)</button>
+    <a href="javascript:history.back()">← Quay lại</a>
+    <span style="color:#64748b">Mẹo: in trên giấy decal A4, tỷ lệ 100%, tắt “Headers and footers”.</span>
+</div>
+<div class="sheet">
+    @foreach (var l in Model)
+    {
+        <div class="label">
+            <div class="lib">@(isCard ? "Thẻ thư viện LibManager" : "Thư viện LibManager")</div>
+            <div class="l1" title="@l.Line1">@l.Line1</div>
+            @Ui.Barcode(l.Code, isCard ? 1.9 : 1.45, isCard ? 52 : 38)
+            @if (!string.IsNullOrEmpty(l.Line2)) { <div class="l2">@l.Line2</div> }
+        </div>
+    }
+</div>
+</body>
+</html>
