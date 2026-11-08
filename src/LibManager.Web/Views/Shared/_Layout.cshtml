@@ -1,0 +1,130 @@
+@*
+    Người thực hiện: Bùi Văn Long – MSSV 2410900047
+    Công việc: W3-01 – layout Bootstrap, partial dùng chung, CSS (tuần 3, nhánh feature/long-layout)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@{
+    var isStaff = User.IsInRole(Roles.Admin) || User.IsInRole(Roles.Librarian);
+    var isAdmin = User.IsInRole(Roles.Admin);
+    var isReader = User.IsInRole(Roles.Reader);
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    string Active(string c) => string.Equals(controller, c, StringComparison.OrdinalIgnoreCase) ? "active" : "";
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] – LibManager</title>
+    <link rel="icon" href="~/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="visually-hidden" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          asp-fallback-href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css"
+          asp-fallback-test-class="bi" asp-fallback-test-property="display" asp-fallback-test-value="inline-block" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("Head", required: false)
+</head>
+<body class="@ViewData["BodyClass"]">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark app-nav">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand d-flex align-items-center gap-2" asp-controller="Home" asp-action="Index">
+                <span class="brand-mark"><i class="bi bi-upc-scan"></i></span>
+                <span><strong>Lib</strong>Manager</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Mở menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link @Active("Catalog")" asp-controller="Catalog" asp-action="Index"><i class="bi bi-search"></i> Tra cứu sách</a></li>
+                    @if (isStaff)
+                    {
+                        <li class="nav-item"><a class="nav-link @Active("Circulation")" asp-controller="Circulation" asp-action="Index"><i class="bi bi-arrow-left-right"></i> Quầy lưu thông</a></li>
+                        <li class="nav-item"><a class="nav-link @Active("Lookup")" asp-controller="Lookup" asp-action="Index"><i class="bi bi-upc"></i> Tra cứu bản sao</a></li>
+                        <li class="nav-item"><a class="nav-link @Active("Books")" asp-controller="Books" asp-action="Index"><i class="bi bi-journal-bookmark"></i> Đầu sách</a></li>
+                        <li class="nav-item"><a class="nav-link @Active("Readers")" asp-controller="Readers" asp-action="Index"><i class="bi bi-person-vcard"></i> Độc giả</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle @Active("Reports")" href="#" data-bs-toggle="dropdown"><i class="bi bi-bar-chart"></i> Báo cáo</a>
+                            <ul class="dropdown-menu">
+                                @if (isAdmin) { <li><a class="dropdown-item" asp-controller="Reports" asp-action="Index"><i class="bi bi-speedometer2"></i> Dashboard lưu thông</a></li> }
+                                <li><a class="dropdown-item" asp-controller="Reports" asp-action="Overdue"><i class="bi bi-alarm"></i> Sách quá hạn</a></li>
+                            </ul>
+                        </li>
+                    }
+                    @if (isAdmin)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle @Active("Admin") @Active("Categories")" href="#" data-bs-toggle="dropdown"><i class="bi bi-gear"></i> Quản trị</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Admin" asp-action="Users"><i class="bi bi-people"></i> Người dùng &amp; vai trò</a></li>
+                                <li><a class="dropdown-item" asp-controller="Admin" asp-action="ReaderTypes"><i class="bi bi-sliders"></i> Quy định mượn</a></li>
+                                <li><a class="dropdown-item" asp-controller="Categories" asp-action="Index"><i class="bi bi-tags"></i> Thể loại</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" asp-controller="Admin" asp-action="ScanLogs"><i class="bi bi-list-columns"></i> Nhật ký quét</a></li>
+                                <li><a class="dropdown-item" asp-controller="Admin" asp-action="Performance"><i class="bi bi-lightning"></i> Dữ liệu hiệu năng</a></li>
+                                <li><a class="dropdown-item" href="/swagger" target="_blank"><i class="bi bi-braces"></i> Swagger API</a></li>
+                            </ul>
+                        </li>
+                    }
+                    @if (isReader)
+                    {
+                        <li class="nav-item"><a class="nav-link @Active("MyLibrary")" asp-controller="MyLibrary" asp-action="Index"><i class="bi bi-bookmark-heart"></i> Sách của tôi</a></li>
+                    }
+                </ul>
+                <ul class="navbar-nav">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle"></i> @User.Identity!.Name
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><span class="dropdown-item-text small text-muted">@(isAdmin ? "Quản trị viên" : isStaff ? "Thủ thư" : "Độc giả")</span></li>
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="bi bi-person"></i> Hồ sơ</a></li>
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="ChangePassword"><i class="bi bi-key"></i> Đổi mật khẩu</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li>
+                                    <form asp-controller="Account" asp-action="Logout" method="post">
+                                        <button class="dropdown-item text-danger"><i class="bi bi-box-arrow-right"></i> Đăng xuất</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Activate">Kích hoạt thẻ</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Register">Đăng ký</a></li>
+                        <li class="nav-item"><a class="btn btn-light btn-sm ms-lg-2 mt-1" asp-controller="Account" asp-action="Login"><i class="bi bi-box-arrow-in-right"></i> Đăng nhập</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="@(ViewData["Fluid"] is true ? "container-fluid px-lg-4" : "container") py-4">
+    <partial name="_Alerts" />
+    @RenderBody()
+</main>
+
+<footer class="app-footer">
+    <div class="container d-flex flex-wrap justify-content-between gap-2 small">
+        <span>&copy; @DateTime.Now.Year LibManager – Đề tài DT10, Nhóm 07, K24 CNTT – Trường ĐH Nguyễn Trãi</span>
+        <span class="text-muted">TTCĐ + Đồ án 2 (11CN16)</span>
+    </div>
+</footer>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastHost"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js" asp-fallback-test="window.jQuery"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-fallback-test="window.bootstrap"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

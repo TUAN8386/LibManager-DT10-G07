@@ -1,0 +1,13 @@
+@*
+    Người thực hiện: Bùi Văn Long – MSSV 2410900047
+    Công việc: W3-01 – layout Bootstrap, partial dùng chung, CSS (tuần 3, nhánh feature/long-layout)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@model string
+@{ ViewData["Title"] = "Lỗi"; }
+<div class="text-center py-5">
+    <i class="bi bi-bug display-3 text-danger"></i>
+    <h1 class="h3 mt-3">Đã xảy ra lỗi khi xử lý yêu cầu</h1>
+    <p class="text-muted">Mã yêu cầu: <code>@Model</code>. Vui lòng thử lại hoặc báo cho quản trị viên.</p>
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">Về trang chủ</a>
+</div>

@@ -1,0 +1,19 @@
+@*
+    Người thực hiện: Bùi Văn Long – MSSV 2410900047
+    Công việc: W3-01 – layout Bootstrap, partial dùng chung, CSS (tuần 3, nhánh feature/long-layout)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@if (TempData["ok"] is string ok)
+{
+    <div class="alert alert-success alert-dismissible fade show d-flex align-items-start gap-2" role="alert">
+        <i class="bi bi-check-circle-fill mt-1"></i><div>@ok</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+    </div>
+}
+@if (TempData["err"] is string err)
+{
+    <div class="alert alert-danger alert-dismissible fade show d-flex align-items-start gap-2" role="alert">
+        <i class="bi bi-exclamation-triangle-fill mt-1"></i><div>@err</div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+    </div>
+}

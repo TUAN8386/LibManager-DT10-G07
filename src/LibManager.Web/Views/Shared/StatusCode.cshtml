@@ -1,0 +1,15 @@
+@*
+    Người thực hiện: Bùi Văn Long – MSSV 2410900047
+    Công việc: W3-01 – layout Bootstrap, partial dùng chung, CSS (tuần 3, nhánh feature/long-layout)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@model int
+@{
+    ViewData["Title"] = Model == 404 ? "Không tìm thấy" : $"Lỗi {Model}";
+    var msg = Model switch { 404 => "Trang hoặc dữ liệu bạn tìm không tồn tại.", 403 => "Bạn không có quyền truy cập.", _ => "Yêu cầu không thể xử lý." };
+}
+<div class="text-center py-5">
+    <div class="display-1 fw-bold text-primary opacity-50">@Model</div>
+    <p class="lead">@msg</p>
+    <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Index">Về trang chủ</a>
+</div>

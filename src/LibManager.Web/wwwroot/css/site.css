@@ -1,0 +1,105 @@
+/*
+    Người thực hiện: Bùi Văn Long – MSSV 2410900047
+    Công việc: W3-01 – layout Bootstrap, partial dùng chung, CSS (tuần 3, nhánh feature/long-layout)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*/
+/* LibManager – giao diện chung (Bootstrap 5 + tùy biến) */
+:root {
+  --lm-primary: #1d4ed8;
+  --lm-primary-dark: #1e3a8a;
+  --lm-ink: #0f172a;
+  --lm-muted: #64748b;
+  --lm-surface: #ffffff;
+  --lm-bg: #f4f6fb;
+  --lm-ok: #16a34a;
+  --lm-err: #dc2626;
+  --lm-warn: #d97706;
+  --bs-primary: #1d4ed8;
+  --bs-primary-rgb: 29, 78, 216;
+  --bs-link-color: #1d4ed8;
+  --bs-link-color-rgb: 29, 78, 216;
+  --bs-body-font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+html { font-size: 15px; }
+body { background: var(--lm-bg); color: var(--lm-ink); min-height: 100vh; display: flex; flex-direction: column; }
+main { flex: 1; }
+
+.btn-primary { --bs-btn-bg: var(--lm-primary); --bs-btn-border-color: var(--lm-primary); --bs-btn-hover-bg: var(--lm-primary-dark); --bs-btn-hover-border-color: var(--lm-primary-dark); }
+.btn-outline-primary { --bs-btn-color: var(--lm-primary); --bs-btn-border-color: var(--lm-primary); --bs-btn-hover-bg: var(--lm-primary); --bs-btn-hover-border-color: var(--lm-primary); }
+
+/* ---------- Thanh điều hướng */
+.app-nav { background: linear-gradient(90deg, #0f1f4b, var(--lm-primary-dark) 55%, #1d4ed8); box-shadow: 0 2px 10px rgba(15, 23, 42, .18); }
+.app-nav .nav-link { color: rgba(255, 255, 255, .82); font-weight: 500; border-radius: .4rem; }
+.app-nav .nav-link:hover, .app-nav .nav-link.active { color: #fff; background: rgba(255, 255, 255, .12); }
+.brand-mark { width: 32px; height: 32px; border-radius: 8px; background: #fff; color: var(--lm-primary-dark); display: inline-grid; place-items: center; font-size: 1.1rem; }
+.app-footer { padding: 18px 0; border-top: 1px solid #e2e8f0; background: #fff; color: var(--lm-muted); }
+
+/* ---------- Thẻ, bảng */
+.card { border: 1px solid #e5e9f2; border-radius: .75rem; box-shadow: 0 1px 2px rgba(15, 23, 42, .04); }
+.card-header { background: #fff; border-bottom: 1px solid #eef1f6; font-weight: 600; }
+.table > :not(caption) > * > * { padding: .55rem .7rem; }
+.table thead th { font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: var(--lm-muted); font-weight: 600; background: #f8fafc; }
+.page-title { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; margin-bottom: 1.25rem; }
+.page-title h1 { font-size: 1.45rem; font-weight: 700; margin: 0; }
+.page-title .sub { color: var(--lm-muted); font-size: .92rem; }
+.mono { font-family: Consolas, "Cascadia Mono", monospace; letter-spacing: .02em; }
+.stat { padding: 1rem 1.1rem; }
+.stat .num { font-size: 1.7rem; font-weight: 700; line-height: 1.1; }
+.stat .lbl { color: var(--lm-muted); font-size: .85rem; }
+.stat i { font-size: 1.5rem; opacity: .85; }
+
+/* ---------- Bìa sách */
+.cover { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: .5rem; background: #e2e8f0; }
+.cover-sm { width: 46px; height: 62px; object-fit: cover; border-radius: .3rem; flex: none; }
+.cover-fallback { display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 1.6rem; letter-spacing: .05em;
+  background: linear-gradient(145deg, hsl(var(--h) 55% 42%), hsl(calc(var(--h) + 40) 60% 28%)); }
+.cover-sm.cover-fallback { font-size: .85rem; }
+.book-card { transition: transform .12s ease, box-shadow .12s ease; height: 100%; }
+.book-card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15, 23, 42, .09); }
+.book-card .title { font-weight: 600; font-size: .95rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.book-card .authors { color: var(--lm-muted); font-size: .83rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ---------- Hero trang chủ */
+.hero { background: radial-gradient(1200px 300px at 10% 0%, #dbeafe, transparent), linear-gradient(120deg, #eff6ff, #fff); border: 1px solid #dbe4f3; border-radius: 1rem; padding: 2.2rem; }
+.hero h1 { font-weight: 800; letter-spacing: -.01em; }
+.hero .search-lg .form-control { height: 52px; font-size: 1.05rem; }
+
+/* ---------- Quầy lưu thông (màn hình quét) */
+.desk { display: grid; grid-template-columns: minmax(320px, 420px) 1fr; gap: 1.25rem; }
+@media (max-width: 992px) { .desk { grid-template-columns: 1fr; } }
+.scan-box { position: relative; }
+.scan-box input { height: 64px; font-size: 1.6rem; font-family: Consolas, monospace; letter-spacing: .06em; padding-left: 3.2rem; border-width: 2px; }
+.scan-box input:focus { border-color: var(--lm-primary); box-shadow: 0 0 0 .3rem rgba(29, 78, 216, .15); }
+.scan-box .bi { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-size: 1.5rem; color: var(--lm-muted); }
+.scan-state { display: inline-flex; align-items: center; gap: .45rem; font-size: .85rem; font-weight: 600; padding: .25rem .65rem; border-radius: 99px; background: #e2e8f0; color: #334155; }
+.scan-state .dot { width: 9px; height: 9px; border-radius: 50%; background: #94a3b8; }
+.scan-state.ready { background: #dcfce7; color: #166534; }
+.scan-state.ready .dot { background: var(--lm-ok); animation: pulse 1.4s infinite; }
+.scan-state.away { background: #fef3c7; color: #92400e; }
+.scan-state.away .dot { background: var(--lm-warn); }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, .55); } 70% { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); } 100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); } }
+.flash-ok { animation: flashOk .7s ease; }
+.flash-err { animation: flashErr .9s ease; }
+@keyframes flashOk { 0% { background: #bbf7d0; } 100% { background: transparent; } }
+@keyframes flashErr { 0%, 30% { background: #fecaca; } 100% { background: transparent; } }
+.mode-tabs .btn { min-width: 150px; font-weight: 600; }
+.kbd { display: inline-block; padding: .05rem .4rem; border: 1px solid #cbd5e1; border-bottom-width: 2px; border-radius: .3rem; background: #fff; font-family: Consolas, monospace; font-size: .78rem; color: #334155; }
+.reader-panel .name { font-size: 1.3rem; font-weight: 700; }
+.reader-panel.blocked { border-color: #fecaca; background: #fff7f7; }
+.reader-panel.okay { border-color: #bbf7d0; }
+.feed { max-height: 420px; overflow: auto; }
+.feed-item { border-left: 4px solid #cbd5e1; padding: .55rem .8rem; border-radius: .4rem; background: #fff; margin-bottom: .5rem; }
+.feed-item.ok { border-left-color: var(--lm-ok); }
+.feed-item.err { border-left-color: var(--lm-err); }
+.feed-item.warn { border-left-color: var(--lm-warn); }
+.big-msg { font-size: 1.15rem; font-weight: 600; }
+.sim-panel { border: 1px dashed #94a3b8; border-radius: .6rem; padding: .7rem; background: #f8fafc; }
+
+/* ---------- In ấn */
+@media print {
+  .app-nav, .app-footer, .no-print, .toast-container { display: none !important; }
+  body { background: #fff; }
+  main { padding: 0 !important; }
+  .card { box-shadow: none; border-color: #ccc; }
+}

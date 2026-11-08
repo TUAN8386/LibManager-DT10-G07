@@ -1,0 +1,23 @@
+@*
+    Người thực hiện: Bùi Văn Long – MSSV 2410900047
+    Công việc: W3-01 – layout Bootstrap, partial dùng chung, CSS (tuần 3, nhánh feature/long-layout)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.21.0/dist/jquery.validate.min.js"
+        asp-fallback-src="~/lib/jquery-validation/dist/jquery.validate.min.js"
+        asp-fallback-test="window.jQuery && window.jQuery.validator"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@4.0.0/dist/jquery.validate.unobtrusive.min.js"
+        asp-fallback-src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
+        asp-fallback-test="window.jQuery && window.jQuery.validator && window.jQuery.validator.unobtrusive"></script>
+<script>
+    // Thông báo mặc định tiếng Việt + chấp nhận số thập phân kiểu vi-VN (1.000,5)
+    if (window.jQuery && jQuery.validator) {
+        jQuery.extend(jQuery.validator.messages, {
+            required: "Trường này là bắt buộc.", email: "Email không hợp lệ.", number: "Vui lòng nhập số.",
+            digits: "Chỉ nhập chữ số.", maxlength: jQuery.validator.format("Tối đa {0} ký tự."),
+            minlength: jQuery.validator.format("Tối thiểu {0} ký tự."), range: jQuery.validator.format("Giá trị từ {0} đến {1}.")
+        });
+        jQuery.validator.methods.number = function (v, el) { return this.optional(el) || /^-?\d+([.,]\d+)?$/.test(v.replace(/\./g, '').replace(/\s/g, '')); };
+        jQuery.validator.methods.range = function (v, el, p) { var n = parseFloat(v.replace(/\./g, '').replace(',', '.')); return this.optional(el) || (n >= p[0] && n <= p[1]); };
+    }
+</script>

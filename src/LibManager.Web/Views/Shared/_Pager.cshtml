@@ -1,0 +1,33 @@
+@*
+    Người thực hiện: Bùi Văn Long – MSSV 2410900047
+    Công việc: W3-01 – layout Bootstrap, partial dùng chung, CSS (tuần 3, nhánh feature/long-layout)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@model (int Page, int TotalPages, int Total)
+@{
+    var query = Context.Request.Query.Where(q => q.Key != "page").ToDictionary(q => q.Key, q => q.Value.ToString());
+    string PageUrl(int p)
+    {
+        var d = new Dictionary<string, string>(query) { ["page"] = p.ToString() };
+        return "?" + string.Join("&", d.Select(kv => $"{Uri.EscapeDataString(kv.Key)}={Uri.EscapeDataString(kv.Value)}"));
+    }
+    int from = Math.Max(1, Model.Page - 2), to = Math.Min(Model.TotalPages, Model.Page + 2);
+}
+@if (Model.TotalPages <= 1)
+{
+    <p class="text-muted small mb-0">Tổng: @Model.Total bản ghi</p>
+}
+else
+{
+    <nav class="d-flex flex-wrap justify-content-between align-items-center gap-2" aria-label="Phân trang">
+        <span class="text-muted small">Trang @Model.Page/@Model.TotalPages · @Model.Total bản ghi</span>
+        <ul class="pagination pagination-sm mb-0">
+            <li class="page-item @(Model.Page == 1 ? "disabled" : "")"><a class="page-link" href="@PageUrl(Model.Page - 1)">&laquo;</a></li>
+            @for (int p = from; p <= to; p++)
+            {
+                <li class="page-item @(p == Model.Page ? "active" : "")"><a class="page-link" href="@PageUrl(p)">@p</a></li>
+            }
+            <li class="page-item @(Model.Page == Model.TotalPages ? "disabled" : "")"><a class="page-link" href="@PageUrl(Model.Page + 1)">&raquo;</a></li>
+        </ul>
+    </nav>
+}

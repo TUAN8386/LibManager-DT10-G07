@@ -1,0 +1,28 @@
+@*
+    Người thực hiện: Bùi Văn Long – MSSV 2410900047
+    Công việc: W3-01 – layout Bootstrap, partial dùng chung, CSS (tuần 3, nhánh feature/long-layout)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@model BookCardVm
+<a class="card book-card text-decoration-none text-reset" asp-controller="Catalog" asp-action="Details" asp-route-id="@Model.Id">
+    <div class="p-2 pb-0">@Ui.Cover(Model.Title, Model.CoverUrl)</div>
+    <div class="card-body p-2">
+        <div class="title" title="@Model.Title">@Model.Title</div>
+        <div class="authors" title="@Model.Authors">@Model.Authors</div>
+        <div class="d-flex justify-content-between align-items-center mt-2 small">
+            @if (Model.IsReferenceOnly)
+            {
+                <span class="badge text-bg-secondary">Đọc tại chỗ</span>
+            }
+            else if (Model.Available > 0)
+            {
+                <span class="badge text-bg-success">Còn @Model.Available/@Model.Total</span>
+            }
+            else
+            {
+                <span class="badge text-bg-warning">Hết sách</span>
+            }
+            <span class="text-muted">@Model.PublishYear</span>
+        </div>
+    </div>
+</a>
