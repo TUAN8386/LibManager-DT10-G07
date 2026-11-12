@@ -1,0 +1,26 @@
+@*
+    Người thực hiện: Bùi Văn Long – MSSV 2410900047
+    Công việc: W3-04 – mã bản sao Luhn, Code 128, in nhãn (tuần 3, nhánh feature/long-ban-sao)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@model CopyEditVm
+@{ ViewData["Title"] = "Sửa bản sao " + Model.Barcode; }
+<div class="row justify-content-center"><div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">Bản sao <span class="mono">@Model.Barcode</span> · @Model.BookTitle</div>
+        <form asp-action="EditCopy" method="post" class="card-body" novalidate>
+            <input type="hidden" asp-for="Id" /><input type="hidden" asp-for="BookId" /><input type="hidden" asp-for="RowVersion" />
+            <div class="text-center mb-3">@Ui.Barcode(Model.Barcode, 2, 56)</div>
+            <div class="mb-3"><label asp-for="ShelfLocation" class="form-label"></label><input asp-for="ShelfLocation" class="form-control" /></div>
+            <div class="mb-3"><label asp-for="Condition" class="form-label"></label><input asp-for="Condition" class="form-control" /></div>
+            <div class="mb-3">
+                <label asp-for="Status" class="form-label"></label>
+                <select asp-for="Status" asp-items="Html.GetEnumSelectList<CopyStatus>()" class="form-select"></select>
+                <span asp-validation-for="Status" class="text-danger small"></span>
+                <div class="form-text">Trạng thái “Đang mượn” và “Đặt giữ” chỉ thay đổi qua nghiệp vụ mượn/trả.</div>
+            </div>
+            <button class="btn btn-primary">Lưu</button>
+            <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@Model.BookId">Hủy</a>
+        </form>
+    </div>
+</div></div>
