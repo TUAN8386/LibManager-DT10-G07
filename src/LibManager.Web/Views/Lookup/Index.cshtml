@@ -1,0 +1,26 @@
+@*
+    Người thực hiện: Lê Huy Hoàng – MSSV 2410900038
+    Công việc: W5-03 – màn hình React tra cứu bản sao tức thời (tuần 5, nhánh feature/hoang-tra-cuu-react)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@{
+    ViewData["Title"] = "Tra cứu bản sao tức thời";
+    ViewData["Fluid"] = true;
+}
+<div class="page-title">
+    <div>
+        <h1><i class="bi bi-upc text-primary"></i> Tra cứu bản sao tức thời</h1>
+        <div class="sub">Quét mã bản sao, mã ISBN trên bìa, hoặc gõ một phần nhan đề / tác giả.</div>
+    </div>
+    <a class="btn btn-outline-primary" asp-controller="Circulation" asp-action="Index"><i class="bi bi-arrow-left-right"></i> Sang quầy lưu thông</a>
+</div>
+<div id="lookup-root"
+     data-initial="@ViewBag.Code"
+     data-max-inter-key-ms="@ViewBag.ScanMaxInterKeyMs"
+     data-min-length="@ViewBag.ScanMinLength">
+    <div class="text-center text-muted py-5"><div class="spinner-border"></div><div class="mt-2">Đang tải màn hình tra cứu…</div></div>
+</div>
+@section Scripts {
+    <script src="~/js/barcode-scanner.js" asp-append-version="true"></script>
+    <script type="module" src="~/app/lookup.js" asp-append-version="true"></script>
+}
