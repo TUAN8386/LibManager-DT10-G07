@@ -1,0 +1,19 @@
+@*
+    Người thực hiện: Nguyễn Mạnh Tùng – MSSV 2410900086
+    Công việc: W5-05 – bảng sách quá hạn bằng React (tuần 5, nhánh feature/tung-qua-han)
+    Đề tài DT10 LibManager – Nhóm 07 – K24CNT1
+*@
+@{
+    ViewData["Title"] = "Sách quá hạn";
+    ViewData["Fluid"] = true;
+}
+<div class="page-title">
+    <div>
+        <h1><i class="bi bi-alarm text-danger"></i> Sách quá hạn</h1>
+        <div class="sub">Lọc, sắp xếp và gửi email nhắc trả ngay tại bảng.</div>
+    </div>
+</div>
+<div id="overdue-root"><div class="text-center text-muted py-5"><div class="spinner-border"></div></div></div>
+@section Scripts {
+    <script type="module" src="~/app/overdue.js" asp-append-version="true"></script>
+}
